@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
-
+//console.log(event.target.name); // Name des Eingabefeldes
+//console.log(event.target.value); // Wert des Eingabefeldes
+// value={player.name} hängt den dynamisch erzeugten value an
+import { useState } from 'react';
+import styled from 'styled-components';
+import PlayerForm from './PlayerForm';
+import PlayerCard from './PlayerCard';
 function App() {
+  const [players, setPlayers] = useState([]); // state für die Spieler
+  function addPlayer(player) {
+    setPlayers([...players, player]); // die Formulareingaben werden hier hineingeschoben
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>German Soccer Transfer:</h1>
+      <Grid>
+        <PlayerForm onAddPlayer={addPlayer} />
+        <Players>
+          {players.map((player) => (
+            <PlayerCard player={player} />
+          ))}
+        </Players>
+      </Grid>
     </div>
   );
 }
-
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1 fr;
+  gap: 1rem;
+  @media (min-width: 576px) {
+    grid-template-columns: 1fr 2fr;
+  }
+`;
+const Players = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+`;
 export default App;
