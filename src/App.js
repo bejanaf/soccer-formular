@@ -5,13 +5,14 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import PlayerForm from './PlayerForm';
 import PlayerCard from './PlayerCard';
+
 function App() {
   const [players, setPlayers] = useState([]); // state für die Spieler
   function addPlayer(player) {
     setPlayers([...players, player]); // die Formulareingaben werden hier hineingeschoben
   }
   return (
-    <div>
+    <Box>
       <h1>German Soccer Transfer:</h1>
       <Grid>
         <PlayerForm onAddPlayer={addPlayer} />
@@ -21,7 +22,7 @@ function App() {
           ))}
         </Players>
       </Grid>
-    </div>
+    </Box>
   );
 }
 const Grid = styled.div`
@@ -38,3 +39,13 @@ const Players = styled.div`
   gap: 0.5rem;
 `;
 export default App;
+
+const Box = styled.div`
+  padding-left: 1rem;
+
+  h1 {
+    color: white;
+    font-size: 3.5rem;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  }
+`;

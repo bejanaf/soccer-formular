@@ -149,7 +149,6 @@ export default function PlayerForm({ onAddPlayer }) {
   );
 }
 const Form = styled.form`
-  background: white;
   display: grid;
   gap: 0.5rem;
   margin: 0 auto;
