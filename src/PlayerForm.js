@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 import { useState } from 'react';
+import Tags from './Tag';
 //import Soccerfieldimg from '../src/images/soccerfield.png';
 export default function PlayerForm({ onAddPlayer }) {
   const initialPlayerState = {
@@ -10,8 +11,10 @@ export default function PlayerForm({ onAddPlayer }) {
     position: '',
     email: '',
     club: '',
+    skills: [],
   };
-  const [player, setPlayer] = useState([]);
+  const [player, setPlayer] = useState(initialPlayerState);
+
   function updatePlayer(event) {
     const fieldName = event.target.name;
     let fieldValue = event.target.value;
@@ -25,6 +28,21 @@ export default function PlayerForm({ onAddPlayer }) {
     event.preventDefault();
     onAddPlayer(player);
   }
+
+  function updateSkills(skillToUpdate) {
+    setPlayer({
+      ...player,
+      skills: [...player.skills, skillToUpdate.toUpperCase()],
+    });
+  }
+
+  function removeTags(tagToRemove) {
+    const remainingSkill = player.skills.filter(
+      (skill) => skill !== tagToRemove
+    );
+    setPlayer({ ...player, skills: [...remainingSkill] });
+  }
+
   return (
     <Form onSubmit={handleFormSubmit}>
       <h3>Add a new Player</h3>
@@ -35,6 +53,7 @@ export default function PlayerForm({ onAddPlayer }) {
         onChange={updatePlayer}
         value={player.name}
       />
+
       <label>Transfer Price</label>
       <input
         type="text"
@@ -43,6 +62,7 @@ export default function PlayerForm({ onAddPlayer }) {
         value={player.price}
         disabled={player.free_transfer ? true : false}
       />
+
       <label>On a free transfer</label>
       <input
         type="checkbox"
@@ -51,6 +71,7 @@ export default function PlayerForm({ onAddPlayer }) {
         value={player.free_transfer}
         disabled={player.price !== ''}
       />
+
       <label htmlFor="club">Club</label>
       <select id="club" name="club" onChange={updatePlayer} value={player.club}>
         <option value="select"> ---Please select --- </option>
@@ -104,6 +125,11 @@ export default function PlayerForm({ onAddPlayer }) {
           Goalie
         </label>
       </Position>
+      <Tags
+        toDelete={removeTags}
+        onUpdateTags={updateSkills}
+        tags={player.skills}
+      />
       <label htmlFor="email">Contact</label>
       <input
         type="text"

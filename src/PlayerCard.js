@@ -7,6 +7,11 @@ export default function PlayerCard({ player }) {
       <p>{player.club}</p>
       <p>{player.position}</p>
       <p>
+        {player.skills.map((skill) => (
+          <span>{skill} </span>
+        ))}
+      </p>
+      <p>
         <a href={`mailto:${player.email}`}> {player.email} </a>
       </p>
     </Card>
