@@ -83,6 +83,7 @@ function App() {
           <option value="fc_st_pauli">FC St. Pauli</option>
         </select>
 
+        {/* fieldset ist das selbe wie section */}
         <fieldset>
           <legend>Position</legend>
           <label>
