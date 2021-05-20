@@ -1,64 +1,43 @@
 //console.log(event.target.name); // Name des Eingabefeldes
 //console.log(event.target.value); // Wert des Eingabefeldes
 // value={player.name} hängt den dynamisch erzeugten value an
-import { Route, Switch } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { saveToLocal, loadFromLocal } from './lib/localStorage';
 import styled from 'styled-components';
-import PlayerForm from './PlayerForm';
-import PlayerCard from './PlayerCard';
 import ShoppingCart from './ShoppingCart';
+import Home from './Home';
+import { loadFromLocal, saveToLocal } from './lib/localStorage';
 
 function App() {
-  const [players, setPlayers] = useState(loadFromLocal('players') ?? []); // state für die Spieler
+  const [shoppingCart, setShoppingCart] = useState(
+    loadFromLocal('shoppingCart') ?? []
+  );
 
   useEffect(() => {
-    saveToLocal('players', players);
-  }, [players]);
+    saveToLocal('shoppingCart', shoppingCart);
+  }, [shoppingCart]);
 
-  function addPlayer(player) {
-    setPlayers([...players, player]); // die Formulareingaben werden hier hineingeschoben
+  function addToShoppingCart(player) {
+    setShoppingCart([...shoppingCart, player]); // die Formulareingaben werden hier hineingeschoben
   }
-
-  const Home = () => <h1>German Soccer Transfer:</h1>;
 
   return (
     <Box>
-      {/* <h1>German Soccer Transfer:</h1> */}
+      <NavLink to="/">
+        <h1>German Soccer Transfer:</h1>
+      </NavLink>
+      <NavLink to="/shoppingCart">Zum Warenkorb</NavLink>
       <Switch>
         <Route exact path="/">
-          <Home />
+          <Home onAddToShoppingCart={addToShoppingCart} />
         </Route>
         <Route path="/shoppingCart">
-          <ShoppingCart />
+          <ShoppingCart playerItems={shoppingCart} />
         </Route>
       </Switch>
-      <Grid>
-        <PlayerForm onAddPlayer={addPlayer} />
-        <Players>
-          {players.map((player) => (
-            <PlayerCard player={player} />
-          ))}
-        </Players>
-      </Grid>
     </Box>
   );
 }
-
-const Grid = styled.div`
-  display: grid;
-  gap: 1rem;
-  @media (min-width: 576px) {
-    grid-template-columns: 1fr 2fr;
-  }
-  grid-template-columns: 1 fr;
-`;
-
-const Players = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-`;
 
 export default App;
 

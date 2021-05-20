@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Ball from './image/ball.png';
 
-export default function PlayerCard({ player }) {
+export default function PlayerCard({ player, onAddToShoppingCart }) {
   return (
     <Card>
       <h3>{player.name}</h3>
@@ -16,7 +16,7 @@ export default function PlayerCard({ player }) {
       <p>
         <a href={`mailto:${player.email}`}> {player.email} </a>
       </p>
-      <Button>
+      <Button onClick={() => onAddToShoppingCart(player)}>
         <BallImage src={Ball} alt="Image of a Ball " />
       </Button>
     </Card>
