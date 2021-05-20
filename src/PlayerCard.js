@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import Ball from './image/ball.png';
+
 export default function PlayerCard({ player }) {
   return (
     <Card>
@@ -14,15 +16,20 @@ export default function PlayerCard({ player }) {
       <p>
         <a href={`mailto:${player.email}`}> {player.email} </a>
       </p>
+      <Button>
+        <BallImage src={Ball} alt="Image of a Ball " />
+      </Button>
     </Card>
   );
 }
 const Card = styled.article`
   background: white;
+  border-radius: 1rem;
   color: green;
   height: 12rem;
   min-width: calc(100% - 2rem) / 3;
   padding: 1.2rem 1rem;
+  position: relative;
   text-shadow: 0;
 
   h3 {
@@ -37,4 +44,20 @@ const Card = styled.article`
     color: green;
     text-shadow: 0;
   }
+`;
+
+const Button = styled.button`
+  background-color: transparent;
+  left: 75%;
+  border: 0;
+  position: absolute;
+  top: 0;
+`;
+
+const BallImage = styled.img`
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+  top: 0.5rem;
+  width: 2rem;
 `;

@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 import { useState } from 'react';
 import Tags from './Tag';
 import validatePlayer from './lib/Validation';
-//import Soccerfieldimg from '../src/images/soccerfield.png';
+
 export default function PlayerForm({ onAddPlayer }) {
   const initialPlayerState = {
     //anlegen eines Prototyps für alle properties (key)
@@ -22,6 +22,7 @@ export default function PlayerForm({ onAddPlayer }) {
   function updatePlayer(event) {
     const fieldName = event.target.name;
     let fieldValue = event.target.value;
+
     if (event.target.type === 'checkbox') {
       // checkbox übermittelt keinen value, deshalb immer im State speichern
       fieldValue = event.target.checked; // ist true oder false
