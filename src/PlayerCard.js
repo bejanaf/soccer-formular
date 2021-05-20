@@ -18,21 +18,23 @@ export default function PlayerCard({ player }) {
   );
 }
 const Card = styled.article`
-  //background: hsl(160, 60%, 50%);
-  background: green;
-  border-radius: 0.4rem;
-  color: hsl(160, 96%, 96%);
-  padding: 1.2rem 1rem;
+  background: white;
+  color: green;
   height: 12rem;
   min-width: calc(100% - 2rem) / 3;
+  padding: 1.2rem 1rem;
+  text-shadow: 0;
+
   h3 {
     margin-top: 0;
   }
   p {
     margin: 0.3rem 0;
+    text-shadow: 0;
   }
   a {
     //color: hsl(160, 10%, 20%);
-    color: white;
+    color: green;
+    text-shadow: 0;
   }
 `;

@@ -43,8 +43,8 @@ export default function Tags({ tags, onUpdateTags, toDelete }) {
 
 const Tag = styled.section`
   display: grid;
-  gap: 0.4rem;
   font-family: sans-serif;
+  gap: 0.4rem;
 
   input {
     border: none;
@@ -55,15 +55,15 @@ const Tag = styled.section`
 `;
 
 const TagCloud = styled.div`
-  display: flex;
   border: 2px solid black;
+  display: flex;
 
   span {
-    display: flex;
-    background: deepskyblue;
-    color: ivory;
-    padding: 0.3rem;
+    background: limegreen;
     border-radius: 0.3rem;
+    color: ivory;
+    display: flex;
     margin: 0.1rem;
+    padding: 0.3rem;
   }
 `;

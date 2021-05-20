@@ -1,6 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import SoccerBackground from './image/soccer.jpg';
-import Soccerhall from './image/soccerhall.jpg';
 import Race from './image/race.jpg';
 
 export default createGlobalStyle`
@@ -18,6 +16,5 @@ body {
     font-family: sans-serif;
     font-size: 1.1rem;
     color: white;
-    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 `;

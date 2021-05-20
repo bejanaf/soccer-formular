@@ -27,11 +27,11 @@ function App() {
 }
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 1 fr;
   gap: 1rem;
   @media (min-width: 576px) {
     grid-template-columns: 1fr 2fr;
   }
+  grid-template-columns: 1 fr;
 `;
 const Players = styled.div`
   display: flex;

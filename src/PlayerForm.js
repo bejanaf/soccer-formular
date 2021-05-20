@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro';
 import { useState } from 'react';
 import Tags from './Tag';
+import validatePlayer from './lib/Validation';
 //import Soccerfieldimg from '../src/images/soccerfield.png';
 export default function PlayerForm({ onAddPlayer }) {
   const initialPlayerState = {
@@ -14,6 +15,9 @@ export default function PlayerForm({ onAddPlayer }) {
     skills: [],
   };
   const [player, setPlayer] = useState(initialPlayerState);
+  const [isError, setIsError] = useState(false);
+
+  // Oberhalb die Validierung
 
   function updatePlayer(event) {
     const fieldName = event.target.name;
@@ -24,9 +28,17 @@ export default function PlayerForm({ onAddPlayer }) {
     }
     setPlayer({ ...player, [fieldName]: fieldValue }); // property (key) dynamisch erzeugt, deshalb []
   }
+
   function handleFormSubmit(event) {
     event.preventDefault();
-    onAddPlayer(player);
+
+    if (validatePlayer(player)) {
+      onAddPlayer(player);
+      setPlayer(initialPlayerState);
+      setIsError(false);
+    } else {
+      setIsError(true);
+    }
   }
 
   function updateSkills(skillToUpdate) {
@@ -46,6 +58,7 @@ export default function PlayerForm({ onAddPlayer }) {
   return (
     <Form onSubmit={handleFormSubmit}>
       <h3>Add a new Player</h3>
+      {isError && <ErrorBox>You have an Error in your Form!</ErrorBox>}
       <label>Player Name</label>
       <input
         type="text"
@@ -149,21 +162,32 @@ export default function PlayerForm({ onAddPlayer }) {
   );
 }
 const Form = styled.form`
+  border: 3px white solid;
   display: grid;
   gap: 0.5rem;
   margin: 0 auto;
+  margin-bottom: 0.6rem;
+  padding: 1.5rem;
+
+  h3 {
+    text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
+  }
+
   label {
-    font-weight: bold;
     font-size: 20px;
-    color: green;
+    font-weight: bold;
+    text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
   }
   input,
   select {
     font-size: 1.25rem;
   }
-  input[type='checkbox'],
+  input[type='checkbox'] {
+    transform: scale(1.8);
+  }
   input[type='radio'] {
-    transform: scale() (1.4);
+    transform: scale(1.3);
+    margin-bottom: 0.4rem;
   }
 `;
 const Position = styled.section`
@@ -176,8 +200,15 @@ const Buttons = styled.section`
   padding: 0.5rem;
 `;
 const Button = styled.button`
-  padding: 1rem;
-  border-radius: 5rem;
   background: white;
+  border-radius: 1rem;
   cursor: pointer;
+  padding: 1rem;
+`;
+
+const ErrorBox = styled.div`
+  background: hsl(330, 60%, 50%);
+  color: hsl(330, 95%, 95%);
+  padding: 1rem;
+  border-radius: 0.5rem;
 `;
