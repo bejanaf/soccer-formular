@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 import Ball from './image/ball.png';
 
-export default function PlayerCard({ player, onAddToShoppingCart }) {
+export default function PlayerCard({
+  player,
+  onAddToShoppingCart,
+  onEditPlayer,
+  onDeletePlayer,
+}) {
   return (
     <Card>
       <h3>{player.name}</h3>
@@ -19,6 +24,9 @@ export default function PlayerCard({ player, onAddToShoppingCart }) {
       <Button onClick={() => onAddToShoppingCart(player)}>
         <BallImage src={Ball} alt="Image of a Ball " />
       </Button>
+      {/* <button onClick={() => onaddBuyingList(player)}>Get the Player</button> */}
+      <button onClick={() => onEditPlayer(player)}>Edit the Player</button>
+      <button onClick={() => onDeletePlayer(player)}>Delete the Player</button>
     </Card>
   );
 }
