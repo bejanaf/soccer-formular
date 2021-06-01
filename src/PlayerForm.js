@@ -14,7 +14,7 @@ export default function PlayerForm({
     price: '',
     free_transfer: false,
     position: '',
-    email: '',
+    mail: '',
     club: '',
     skills: [],
   };
@@ -166,11 +166,11 @@ export default function PlayerForm({
         onUpdateTags={updateSkills}
         tags={player.skills}
       />
-      <label htmlFor="email">Contact</label>
+      <label htmlFor="mail">Contact</label>
       <input
         type="text"
-        name="email"
-        value={player.email}
+        name="mail"
+        value={player.mail}
         onChange={updatePlayer}
       />
       <Buttons>

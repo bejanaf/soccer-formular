@@ -17,7 +17,6 @@ export default function Home({ onAddToShoppingCart }) {
       .catch((error) => console.error(error));
   }, []);
 
-  // players to player!!!
   useEffect(() => {
     saveToLocal('players', players);
   }, [players]);
@@ -75,7 +74,7 @@ export default function Home({ onAddToShoppingCart }) {
   function deletePlayer(player) {
     fetch('http://localhost:4000/player/' + player._id, {
       method: 'DELETE',
-      headers: { 'Content-Type': 'application.json' },
+      headers: { 'Content-Type': 'application/json' },
     })
       .then((result) => result.json())
       .then((response) => {

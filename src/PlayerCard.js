@@ -19,7 +19,7 @@ export default function PlayerCard({
         ))}
       </p>
       <p>
-        <a href={`mailto:${player.email}`}> {player.email} </a>
+        <a href={`mailto:${player.mail}`}> {player.mail} </a>
       </p>
       <Button onClick={() => onAddToShoppingCart(player)}>
         <BallImage src={Ball} alt="Image of a Ball " />
